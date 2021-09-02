@@ -3,6 +3,7 @@ before_action :authenticate_user!
 before_action :set_book
   def show
     @book = Book.find(params[:id])
+    @book_comment = BookComment.new
     @books = Book.new
     @user = User.find_by(id: @book.user_id)
      redirect_to books_url if @book.blank?
