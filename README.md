@@ -22,3 +22,7 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+https://qiita.com/komayuka/items/d9c429f761998bd1b14e
+
+https://qiita.com/okamoto_ryo/items/95c9252167a9ae11c84c
