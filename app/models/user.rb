@@ -13,8 +13,29 @@ class User < ApplicationRecord
   has_many :followings, through: :relationships,source: :followed
   has_many :followers, through: :passive_relationships,source: :follower
 
-  
-  
+
+def self.search(search,word)
+  # if method == "forward_match"
+  # self.where("name LIKE?","#{word}%")
+  # elsif method == "backward_match"
+  # self.where("name LIKE?","%#{word}")
+  # elsif method == "perfect_match"
+  # self.where(name: word)
+  # elsif method == "partial_match"
+  # self.where("name LIKE?","%#{word}%")
+  # else
+  # self.all
+  # end
+  case search
+  when "forward_match" then where("name LIKE?","#{word}%")
+  when "backward_match" then where("name LIKE?","%#{word}")
+  when "perfect_match" then where(name: word)
+  when "partial_match" then where("name LIKE?","%#{word}%")
+  else all
+  end
+end
+
+
   def follow(user_id)
       unless self == user_id
        self.relationships.find_or_create_by(followed_id: user_id.to_i, follower_id: self.id)

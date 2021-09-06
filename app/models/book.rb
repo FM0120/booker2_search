@@ -6,6 +6,21 @@ has_many :favorites, dependent: :destroy
 #  1人のユーザがコメントを投稿できます。
 # Userモデルでの1人のユーザに対して、複数個（N個）のbook_commentsモデルを関連付けられます。
 
+def self.search(search, word)
+  if search == "forward_match"
+   @book = Book.where("title LIKE?","#{word}%")
+  elsif search == "backward_match"
+   @book = Book.where("title LIKE?","%#{word}")
+  elsif search == "perfect_match"
+   @book = Book.where("#{word}")
+  elsif search == "partial_match"
+   @book = Book.where("title LIKE?","%#{word}%")
+  else
+   @book = Book.all
+  end
+end
+
+
  
 validates :title, presence: true
 

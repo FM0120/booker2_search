@@ -1,16 +1,17 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: 'homes#top'
-    resources :post_comments, only: [:create, :destroy]
-    get '/home/about' => 'homes#about'
-    get '/users/logout' => 'devise/sessions#destroy'
+  get 'search' => 'searches#search'
+   
+  resources :post_comments, only: [:create, :destroy]
+  get '/home/about' => 'homes#about'
+  get '/users/logout' => 'devise/sessions#destroy'
 
-
-   resources :users do
-   resources :relationships, only: [:create, :destroy, :followers,:followings]
-   get 'relationships/followers' => 'relationships#followers', as: 'followers'
-   get 'relationships/followings' => 'relationships#followings', as: 'followings'
-   end
+  resources :users do
+  resources :relationships, only: [:create, :destroy, :followers,:followings]
+  get 'relationships/followers' => 'relationships#followers', as: 'followers'
+  get 'relationships/followings' => 'relationships#followings', as: 'followings'
+  end
 
 
     resources :users,only: [:show,:index,:edit,:update, :destroy,:index]
